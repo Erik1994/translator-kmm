@@ -1,6 +1,9 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
+    id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
+    kotlin("plugin.serialization") version Gradle.kotlinVersion
 }
 
 android {
@@ -40,9 +43,8 @@ android {
 
 dependencies {
     implementation(projects.shared)
-    implementation(libs.compose.ui)
-    implementation(libs.compose.ui.tooling.preview)
-    implementation(libs.compose.material3)
-    implementation(libs.androidx.activity.compose)
-    debugImplementation(libs.compose.ui.tooling)
+    compose()
+    hilt()
+    ktorAndroid()
+    test()
 }
