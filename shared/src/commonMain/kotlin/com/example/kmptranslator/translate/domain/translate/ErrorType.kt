@@ -7,6 +7,6 @@ enum class ErrorType {
     UNKNOWN_ERROR
 }
 
-class AppException(val error: ErrorType) : Exception(
+class AppException(private val error: ErrorType) : Exception(
    "An error occurred when translating: $error"
 )
