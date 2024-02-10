@@ -1,4 +1,4 @@
-package com.example.kmptranslator.translate.data
+package com.example.kmptranslator.core.data.mapper
 
 fun interface Mapper<SOURCE, RESULT> {
 

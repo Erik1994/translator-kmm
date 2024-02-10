@@ -62,3 +62,10 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 }
+
+sqldelight {
+    database("TranslateDatabase") {
+        packageName = "com.example.kmptranslator"
+        sourceFolders = listOf("sqldelight")
+    }
+}
