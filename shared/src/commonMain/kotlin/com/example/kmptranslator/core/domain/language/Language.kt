@@ -6,7 +6,6 @@ enum class Language(
 ) {
     ENGLISH("en", "English"),
     ARABIC("ar", "Arabic"),
-    AZERBAIJANI("az", "Azerbaijani"),
     CHINESE("zh", "Chinese"),
     CZECH("cs", "Czech"),
     DANISH("da", "Danish"),
@@ -30,7 +29,6 @@ enum class Language(
     SLOVAK("sk", "Slovak"),
     SPANISH("es", "Spanish"),
     SWEDISH("sv", "Swedish"),
-    TURKISH("tr", "Turkish"),
     UKRAINIAN("uk", "Ukrainian");
 
     companion object {

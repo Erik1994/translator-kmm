@@ -8,8 +8,8 @@ enum class ErrorType {
 }
 
 class AppException(
-    private val error: ErrorType,
-    private val errorMessage: String = "An error occurred when translating"
+    val error: ErrorType,
+    val errorMessage: String = "An error occurred when translating"
 ) : Exception(
     "$errorMessage: $error"
 )

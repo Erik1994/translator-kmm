@@ -9,3 +9,6 @@ sealed class Resource<T>(val data: T?, val throwable: Throwable? = null) {
         throwable: Throwable
     ) : Resource<T>(data = null, throwable = throwable)
 }
+
+
+fun <T> T?.orDefault(value: T): T = this ?: value
