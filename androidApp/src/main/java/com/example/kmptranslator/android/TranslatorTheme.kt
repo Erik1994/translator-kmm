@@ -10,6 +10,7 @@ import androidx.compose.ui.unit.dp
 import com.example.kmptranslator.android.core.theme.AppTypography
 import com.example.kmptranslator.android.core.theme.Dimensions
 import com.example.kmptranslator.android.core.theme.LocalDimension
+import com.example.kmptranslator.android.core.theme.Shapes
 import com.example.kmptranslator.android.core.theme.darkColors
 import com.example.kmptranslator.android.core.theme.lightColors
 
@@ -24,17 +25,11 @@ fun TranslatorTheme(
         lightColors
     }
 
-    val shapes = Shapes(
-        small = RoundedCornerShape(4.dp),
-        medium = RoundedCornerShape(4.dp),
-        large = RoundedCornerShape(0.dp)
-    )
-
     CompositionLocalProvider(LocalDimension provides Dimensions()) {
         MaterialTheme(
             colorScheme = colors,
             typography = AppTypography,
-            shapes = shapes,
+            shapes = Shapes,
             content = content
         )
     }
