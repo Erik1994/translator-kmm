@@ -5,11 +5,15 @@ struct ContentView: View {
     private let appModule: AppModule = AppModule()
 
 	var body: some View {
-		TranslateScreen(
-            historyDataSource: appModule.historyDataSource,
-            translateUseCase: appModule.translateUseCase,
-            getUiHistoryItemsUseCase: appModule.getUiHistoryItemsUseCase
-        )
+        ZStack {
+            Color.background
+                .ignoresSafeArea()
+            TranslateScreen(
+                historyDataSource: appModule.historyDataSource,
+                translateUseCase: appModule.translateUseCase,
+                getUiHistoryItemsUseCase: appModule.getUiHistoryItemsUseCase
+            )
+        }
 	}
 }
 
