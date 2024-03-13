@@ -11,6 +11,7 @@
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		258A03082BA19A04002497BB /* TranslateTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258A03072BA19A04002497BB /* TranslateTextField.swift */; };
+		258A030A2BA1BC49002497BB /* TextToSpeech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258A03092BA1BC49002497BB /* TextToSpeech.swift */; };
 		259716C22BA0BC27005EEAF2 /* GradientSurface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259716C12BA0BC27005EEAF2 /* GradientSurface.swift */; };
 		259716C42BA0BE7C005EEAF2 /* LanguageDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259716C32BA0BE7C005EEAF2 /* LanguageDisplay.swift */; };
 		259716C62BA0C107005EEAF2 /* ProgressButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259716C52BA0C107005EEAF2 /* ProgressButton.swift */; };
@@ -43,6 +44,7 @@
 		058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
 		258A03072BA19A04002497BB /* TranslateTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateTextField.swift; sourceTree = "<group>"; };
+		258A03092BA1BC49002497BB /* TextToSpeech.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextToSpeech.swift; sourceTree = "<group>"; };
 		259716C12BA0BC27005EEAF2 /* GradientSurface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientSurface.swift; sourceTree = "<group>"; };
 		259716C32BA0BE7C005EEAF2 /* LanguageDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageDisplay.swift; sourceTree = "<group>"; };
 		259716C52BA0C107005EEAF2 /* ProgressButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressButton.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 				25C1522B2B9F826600B94569 /* components */,
 				25C152372B9FA3BB00B94569 /* IOSTranslateViewModel.swift */,
 				25C152392B9FA3E900B94569 /* TranslateScreen.swift */,
+				258A03092BA1BC49002497BB /* TextToSpeech.swift */,
 			);
 			path = presentation;
 			sourceTree = "<group>";
@@ -323,6 +326,7 @@
 				25C152312B9F8FE500B94569 /* LanguageDropDown.swift in Sources */,
 				25F8334C2B98AF79003ACA55 /* Colors.swift in Sources */,
 				25C1523A2B9FA3E900B94569 /* TranslateScreen.swift in Sources */,
+				258A030A2BA1BC49002497BB /* TextToSpeech.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 				258A03082BA19A04002497BB /* TranslateTextField.swift in Sources */,
 			);
@@ -454,6 +458,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -486,6 +491,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
