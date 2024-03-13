@@ -56,6 +56,21 @@ struct TranslateScreen: View {
                 }
                 .listRowSeparator(.hidden)
                 .listRowBackground(Color.background)
+                TranslateTextField(
+                    fromText: Binding(get: { viewmodel.state.fromText },
+                                      set: { value in
+                                          viewmodel.onEvent(event: TranslateEvent.ChangeTranslationText(text: value))
+                                      }
+                                     ),
+                    toText: viewmodel.state.toText,
+                    isTranslating: viewmodel.state.isTranslating,
+                    fromLanguage: viewmodel.state.fromLanguage,
+                    toLanguage: viewmodel.state.toLanguage,
+                    onTranslateEvent: { viewmodel.onEvent(event: $0) }//$0 is equivalent "it" in Kotlin inside some lambda
+                )
+                .listRowSeparator(.hidden)
+                .listRowBackground(Color.background)
+                
             }
             .listStyle(.plain)
             .buttonStyle(.plain)
