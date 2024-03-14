@@ -9,8 +9,8 @@ import android.speech.SpeechRecognizer
 import com.example.kmptranslator.android.R
 import com.example.kmptranslator.core.domain.util.CommonStateFlow
 import com.example.kmptranslator.core.domain.util.toCommonStateFlow
-import com.example.kmptranslator.voicetotext.VoiceToTextParser
-import com.example.kmptranslator.voicetotext.VoiceToTextParserState
+import com.example.kmptranslator.voicetotext.domain.VoiceToTextParser
+import com.example.kmptranslator.voicetotext.domain.VoiceToTextParserState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 

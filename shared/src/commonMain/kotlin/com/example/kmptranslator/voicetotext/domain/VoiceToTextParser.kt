@@ -1,4 +1,4 @@
-package com.example.kmptranslator.voicetotext
+package com.example.kmptranslator.voicetotext.domain
 
 import com.example.kmptranslator.core.domain.util.CommonStateFlow
 

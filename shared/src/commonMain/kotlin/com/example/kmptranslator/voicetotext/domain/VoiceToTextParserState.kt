@@ -1,4 +1,4 @@
-package com.example.kmptranslator.voicetotext
+package com.example.kmptranslator.voicetotext.domain
 
 data class VoiceToTextParserState(
     val result: String = "",
