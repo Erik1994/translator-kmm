@@ -22,15 +22,23 @@ class VoiceToTextViewmodel(
     val state = combine(_state, parser.state) { state, voiceResult ->
         state.copy(
             spokenText = voiceResult.result,
-            recordError = voiceResult.error,
+            recordError = if (state.canRecord) {
+                voiceResult.error
+            } else {
+                "Can't record without permission"
+            },
             displayState = when {
-                voiceResult.error != null -> DisplayState.ERROR
+                !state.canRecord || voiceResult.error != null -> DisplayState.ERROR
                 voiceResult.result.isNotBlank() && !voiceResult.isSpeaking -> DisplayState.DISPLAYING_RESULTS
                 voiceResult.isSpeaking -> DisplayState.SPEAKING
                 else -> DisplayState.WAITING_TO_TALK
             }
         )
-    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(STOP_TIMEOUT_MILLIS), VoiceToTextState())
+    }.stateIn(
+        viewModelScope,
+        SharingStarted.WhileSubscribed(STOP_TIMEOUT_MILLIS),
+        VoiceToTextState()
+    )
         .toCommonStateFlow()
 
     init {
@@ -49,22 +57,29 @@ class VoiceToTextViewmodel(
     }
 
     fun onEvent(event: VoiceToTextEvent) {
-        when(event) {
+        when (event) {
             is VoiceToTextEvent.PermissionResult -> _state.update {
                 it.copy(
                     canRecord = event.isGranted
                 )
             }
+
             VoiceToTextEvent.Reset -> {
                 parser.reset()
                 _state.update { VoiceToTextState() }
             }
+
             is VoiceToTextEvent.ToggleRecording -> toggleRecording(event.languageCode)
             else -> Unit
         }
     }
 
     private fun toggleRecording(languageCode: String) {
+        _state.update {
+            it.copy(
+                powerRatios = emptyList()
+            )
+        }
         parser.cancel()
         if (state.value.displayState == DisplayState.SPEAKING) {
             parser.stopListening()
