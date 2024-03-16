@@ -7,6 +7,7 @@ import android.speech.RecognitionListener
 import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
 import android.speech.SpeechRecognizer.ERROR_CLIENT
+import android.speech.SpeechRecognizer.ERROR_NO_MATCH
 import com.example.kmptranslator.android.R
 import com.example.kmptranslator.core.domain.util.CommonStateFlow
 import com.example.kmptranslator.core.domain.util.toCommonStateFlow
@@ -93,7 +94,7 @@ class AndroidVoiceToTextParser(
     }
 
     override fun onError(code: Int) {
-        if (code == ERROR_CLIENT) {
+        if (code == ERROR_CLIENT || code == ERROR_NO_MATCH) {
             return
         }
         _state.update {
