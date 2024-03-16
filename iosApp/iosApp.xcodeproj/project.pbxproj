@@ -12,6 +12,7 @@
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		25620D642BA5F3F300F8415A /* MicrophonePowerObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25620D632BA5F3F300F8415A /* MicrophonePowerObserver.swift */; };
 		25620D672BA62BBB00F8415A /* IOSVoiceToTextParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25620D662BA62BBB00F8415A /* IOSVoiceToTextParser.swift */; };
+		25620D6B2BA638F600F8415A /* IOSVoiceToTextViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25620D6A2BA638F600F8415A /* IOSVoiceToTextViewModel.swift */; };
 		258A03082BA19A04002497BB /* TranslateTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258A03072BA19A04002497BB /* TranslateTextField.swift */; };
 		258A030A2BA1BC49002497BB /* TextToSpeech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258A03092BA1BC49002497BB /* TextToSpeech.swift */; };
 		258A030C2BA1DF3B002497BB /* TranslateHistoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258A030B2BA1DF3B002497BB /* TranslateHistoryItem.swift */; };
@@ -48,6 +49,7 @@
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
 		25620D632BA5F3F300F8415A /* MicrophonePowerObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicrophonePowerObserver.swift; sourceTree = "<group>"; };
 		25620D662BA62BBB00F8415A /* IOSVoiceToTextParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSVoiceToTextParser.swift; sourceTree = "<group>"; };
+		25620D6A2BA638F600F8415A /* IOSVoiceToTextViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSVoiceToTextViewModel.swift; sourceTree = "<group>"; };
 		258A03072BA19A04002497BB /* TranslateTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateTextField.swift; sourceTree = "<group>"; };
 		258A03092BA1BC49002497BB /* TextToSpeech.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextToSpeech.swift; sourceTree = "<group>"; };
 		258A030B2BA1DF3B002497BB /* TranslateHistoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateHistoryItem.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 		25620D622BA5F3D000F8415A /* voicetotext */ = {
 			isa = PBXGroup;
 			children = (
+				25620D692BA638DB00F8415A /* presentation */,
 				25620D652BA5F98500F8415A /* data */,
 			);
 			path = voicetotext;
@@ -113,6 +116,14 @@
 				25620D632BA5F3F300F8415A /* MicrophonePowerObserver.swift */,
 			);
 			path = data;
+			sourceTree = "<group>";
+		};
+		25620D692BA638DB00F8415A /* presentation */ = {
+			isa = PBXGroup;
+			children = (
+				25620D6A2BA638F600F8415A /* IOSVoiceToTextViewModel.swift */,
+			);
+			path = presentation;
 			sourceTree = "<group>";
 		};
 		25C152292B9F825300B94569 /* translate */ = {
@@ -341,6 +352,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				259716C62BA0C107005EEAF2 /* ProgressButton.swift in Sources */,
+				25620D6B2BA638F600F8415A /* IOSVoiceToTextViewModel.swift in Sources */,
 				25620D642BA5F3F300F8415A /* MicrophonePowerObserver.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				259716C22BA0BC27005EEAF2 /* GradientSurface.swift in Sources */,
