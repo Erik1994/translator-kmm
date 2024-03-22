@@ -12,45 +12,38 @@ import Speech
 import Combine
 
 class IOSVoiceToTextParser: VoiceToTextParser, ObservableObject {
+    
     private let _state = IOSMutableStateFlow(
-        initialValue: VoiceToTextParserState(
-            result: "",
-            error: nil,
-            powerRatio: 0.0,
-            isSpeaking: false
-        )
+        initialValue: VoiceToTextParserState(result: "", error: nil, powerRatio: 0.0, isSpeaking: false)
     )
     var state: CommonStateFlow<VoiceToTextParserState> { _state }
     
     private var micObserver = MicrophonePowerObserver()
     var micPowerRatio: Published<Double>.Publisher { micObserver.$micPowerRatio }
-    private var micPowerCancellable: AnyCancellable? = nil
+    private var micPowerCancellable: AnyCancellable?
     
     private var recognizer: SFSpeechRecognizer?
     private var audioEngine: AVAudioEngine?
-    private var inputeNode: AVAudioInputNode?
+    private var inputNode: AVAudioInputNode?
     private var audioBufferRequest: SFSpeechAudioBufferRecognitionRequest?
     private var recognitionTask: SFSpeechRecognitionTask?
     private var audioSession: AVAudioSession?
     
     func cancel() {
-        // Not needed in iOS
+        // Not needed on iOS
     }
     
     func reset() {
         self.stopListening()
-        _state.value = VoiceToTextParserState(
-            result: "",
-            error: nil,
-            powerRatio: 0.0,
-            isSpeaking: false
-        )
+        _state.value = VoiceToTextParserState(result: "", error: nil, powerRatio: 0.0, isSpeaking: false)
     }
     
     func startListening(languageCode: String) {
         updateState(error: nil)
+        
         let chosenLocale = Locale.init(identifier: languageCode)
-        let supportedLocale = SFSpeechRecognizer.supportedLocales().contains(chosenLocale) ? chosenLocale: Locale.init(identifier:"en-US")
+        let supportedLocale = SFSpeechRecognizer.supportedLocales().contains(chosenLocale) ? chosenLocale : Locale.init(identifier: "en-US")
+        self.recognizer = SFSpeechRecognizer(locale: supportedLocale)
         
         guard recognizer?.isAvailable == true else {
             updateState(error: "Speech recognizer is not available")
@@ -61,6 +54,7 @@ class IOSVoiceToTextParser: VoiceToTextParser, ObservableObject {
         
         self.requestPermissions { [weak self] in
             self?.audioBufferRequest = SFSpeechAudioBufferRecognitionRequest()
+            
             guard let audioBufferRequest = self?.audioBufferRequest else {
                 return
             }
@@ -70,16 +64,17 @@ class IOSVoiceToTextParser: VoiceToTextParser, ObservableObject {
                     self?.updateState(error: error?.localizedDescription)
                     return
                 }
+                
                 if result.isFinal {
                     self?.updateState(result: result.bestTranscription.formattedString)
                 }
             }
             
             self?.audioEngine = AVAudioEngine()
-            self?.inputeNode = self?.audioEngine?.inputNode
+            self?.inputNode = self?.audioEngine?.inputNode
             
-            let recordingFormat = self?.inputeNode?.outputFormat(forBus: 0)
-            self?.inputeNode?.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { buffer, _ in
+            let recordingFormat = self?.inputNode?.outputFormat(forBus: 0)
+            self?.inputNode?.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { buffer, _ in
                 self?.audioBufferRequest?.append(buffer)
             }
             
@@ -90,8 +85,11 @@ class IOSVoiceToTextParser: VoiceToTextParser, ObservableObject {
                 try self?.audioSession?.setActive(true, options: .notifyOthersOnDeactivation)
                 
                 self?.micObserver.startObserving()
+                
                 try self?.audioEngine?.start()
+                
                 self?.updateState(isSpeaking: true)
+                
                 self?.micPowerCancellable = self?.micPowerRatio
                     .sink { [weak self] ratio in
                         self?.updateState(powerRatio: ratio)
@@ -104,13 +102,17 @@ class IOSVoiceToTextParser: VoiceToTextParser, ObservableObject {
     
     func stopListening() {
         self.updateState(isSpeaking: false)
+        
         micPowerCancellable = nil
         micObserver.release()
+        
         audioBufferRequest?.endAudio()
         audioBufferRequest = nil
+        
         audioEngine?.stop()
-        audioEngine = nil
-        inputeNode?.removeTap(onBus: 0)
+        
+        inputNode?.removeTap(onBus: 0)
+        
         try? audioSession?.setActive(false)
         audioSession = nil
     }
@@ -122,28 +124,23 @@ class IOSVoiceToTextParser: VoiceToTextParser, ObservableObject {
                 self?.stopListening()
                 return
             }
-            SFSpeechRecognizer.requestAuthorization{ [weak self] status in
+            SFSpeechRecognizer.requestAuthorization { [weak self] status in
                 DispatchQueue.main.async {
                     if status != .authorized {
                         self?.updateState(error: "You need to grant permission to transcribe audio.")
                         self?.stopListening()
                         return
                     }
+                    onGranted()
                 }
-                onGranted()
             }
         }
     }
     
-    private func updateState(
-        result: String? = nil,
-        error: String? = nil,
-        powerRatio: CGFloat? = nil,
-        isSpeaking: Bool? = nil
-    ) {
+    private func updateState(result: String? = nil, error: String? = nil, powerRatio: CGFloat? = nil, isSpeaking: Bool? = nil) {
         let currentState = _state.value
         _state.value = VoiceToTextParserState(
-            result: (result ?? currentState?.result) ?? "",
+            result: result ?? currentState?.result ?? "",
             error: error ?? currentState?.error,
             powerRatio: Float(powerRatio ?? CGFloat(currentState?.powerRatio ?? 0.0)),
             isSpeaking: isSpeaking ?? currentState?.isSpeaking ?? false

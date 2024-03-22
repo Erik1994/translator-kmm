@@ -16,12 +16,13 @@ import Combine
     
     private let viewModel: VoiceToTextViewmodel
     @Published var state = VoiceToTextState(powerRatios: [], spokenText: "", canRecord: false, recordError: nil, displayState: nil)
-    private handle: DisposableHandle?
+    private var handle: DisposableHandle?
     
     init(parser: any VoiceToTextParser, langugeCode: String) {
         self.parser = parser
         self.langugeCode = langugeCode
         self.viewModel = VoiceToTextViewmodel(parser: parser, coroutineScope: nil)
+        self.viewModel.onEvent(event: VoiceToTextEvent.PermissionResult(isGranted: true, isPermanentlyDeclined: false))
     }
     
     func onEvent(event: VoiceToTextEvent) {
