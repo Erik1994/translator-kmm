@@ -2,6 +2,7 @@ package com.example.kmptranslator.core.domain.util
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.cancelChildren
@@ -23,6 +24,7 @@ actual open class CommonFlow <T> actual constructor(
         return DisposableHandle { job.cancelChildren() }
     }
 
+    @OptIn(DelicateCoroutinesApi::class)
     fun subscribe(
         onCollect: (T)-> Unit
     ): DisposableHandle {
